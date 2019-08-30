@@ -6,14 +6,12 @@
               <input type="text" value="" placeholder="手机号" v-model="uname" @blur.prevent="checkName">
               <input type="password" value="" placeholder="请输入密码" v-model="pwd">
               <input type="password" value="" placeholder="请输入确认密码" v-model="pwd2">
-              <input type="password" value="" placeholder="基友邀请码（选填）">
               <mt-button size="large" @click="login">注册</mt-button>
             </form>
 					</div>
 				</div>
 				<div class="mui-card-footer">页脚</div>
-			</div>
-    </div>
+	</div>
 </template>
 <script>
   import {Toast} from 'mint-ui';

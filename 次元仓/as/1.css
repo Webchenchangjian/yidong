@@ -1,0 +1,71 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.header{
+  width: 100%;
+  height: 29px;
+  background: #2a2f35;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  color:white;
+}
+.header .header_1 img{
+  vertical-align: middle;
+}
+.header .header_1{
+  line-height: 29px;
+  margin-left:40px; 
+  position: relative;
+}
+/* 二级联动 */
+.header_1 span{
+  width: 410px;
+  color: white;
+  position: relative;
+}
+.header_1 a .city{
+  width: 410px;
+  height: 50px;
+  background: #2a2f35;
+  display: none;
+  list-style: none;
+  position: absolute;
+  top: 20px;
+  left: 90px;
+  padding: 10px;
+}
+.header_1 a .city li{
+  display: inline-block;
+}
+.header_1 a:hover .city{
+  display: block;
+}
+/* 右边登录，注册 */
+.header .header_2{
+  line-height: 29px;
+  margin-right:40px; 
+}
+.header_2 span a{
+  color: white;
+}
+
+
+/* 放大，缩小图片 */
+.image{
+  border: 1px solid #2a2f35;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+}
+.image img{
+  width:300px;
+  height: 300px;
+  transition: all 1s;
+}
+
+.image img:hover{
+  transform: scale(1.1,1.1);
+}

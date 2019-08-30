@@ -7,6 +7,8 @@ var app = express();
 app.use(express.static("public"));
 app.listen(3000);
 const pool=require("./pool");
+// 获取验证码
+const svgCaptcha = require('svg-captcha');
 //express mysql 参数 request;response
 //跨域访问配置
 //1:加载模块cors
@@ -23,7 +25,7 @@ const session = require("express-session");
 app.use(session({
   secret:"128位随机字符串",   //安全令牌
   resave:false,              //请求保存
-  saveUninitialized:true,    //初始化
+  saveUninitialized:false,    //初始化
   cookie:{                   //sessionid保存时
     maxAge:1000*60*60*24     //间1天 cookie
   }
@@ -285,9 +287,6 @@ app.get("/products",(req,res)=>{
   }
 })
 
-
-
-
 // 商品评价
 //功能四：发表评论
 app.get("/addComment",(req,res)=>{
@@ -362,3 +361,27 @@ pageSize = parseInt(pageSize);
     }
   }); 
 })
+// 用户登录验证码
+// 获取验证码
+app.use('/api/getCaptcha', function(req, res, next) {
+  var captcha = svgCaptcha.create({ 
+          // 翻转颜色 
+          inverse: false, 
+          // 字体大小 
+          fontSize: 36, 
+          // 噪声线条数 
+          noise: 2, 
+          // 宽度 
+          width: 80, 
+          // 高度 
+          height: 30, 
+         }); 
+         // 保存到session,忽略大小写 
+         req.session.captcha = captcha.text.toLowerCase(); 
+         console.log(req.session); //0xtg 生成的验证码
+         //保存到cookie 方便前端调用验证
+          res.cookie('captcha', req.session); 
+         res.setHeader('Content-Type', 'image/svg+xml');
+         res.write(String(captcha.data));
+         res.end();
+ })

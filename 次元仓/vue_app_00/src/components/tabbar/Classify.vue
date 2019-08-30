@@ -156,10 +156,10 @@
   background: #fff;
 }
   .app-classify .ding{
+    width:100%;
     background-color: #fff;
     padding-top: 8px;
     border-bottom: 1px solid #d8d8d8;
-    width:375px;
     display:flex;   /*最外层父元素弹性布局*/
     justify-content:space-between;
     flex-wrap:wrap; /*子元素换行*/

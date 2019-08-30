@@ -18,12 +18,10 @@
       <a>次元仓</a>发货
     </div>
     <!--配送地址!-->
-    
-
+    <div class="city">
+      <p>送至</p><span class=""></span><span class=""></span><span class=""></span>
+    </div>
   </div>
-
-
-
   <div class="mui-card">
     <div class="cad" ref="cad">
       <p>款式</p>
@@ -38,7 +36,7 @@
       <div class="mui-card-inner">
         购买数量:
         <div class="mui-numbox" data-numbox-min='1' data-numbox-max='9'>
-					<button class="mui-btn mui-btn-numbox-minus" type="button" @click="goodsSub">-</button>
+					<button class="mui-btn mui-btn-numbox-minus" ref="c12" type="button" @click="goodsSub" style="background:#fd620d">-</button>
 					<input id="test" class="mui-input-numbox" type="number" value="1" v-model="val"/>
 					<button class="mui-btn mui-btn-numbox-plus" type="button" @click="goodsAdd">+</button>
 				</div>
@@ -69,7 +67,8 @@ import comment from "../sub/comment.vue"
       lid:this.$route.params.lid,
       val:1,
       info:{},
-      price:""
+      price:"",
+      uid:''
     }
   },
   created() {
@@ -91,6 +90,16 @@ import comment from "../sub/comment.vue"
       })
     },
     addCart(){
+      // var url="http://127.0.0.1:3000/getSession";
+      // this.axios.get(url).then(result=>{
+      //   console.log(result)
+      //   if(result.data<1){
+      //     Toast("未登录，请登录");
+      //     this.$router.push("/login")
+      //     return false;
+      //   }
+      //   })
+      console.log(this.uid)
         var uid=this.uid;//当前登录用户
         console.log(uid)
         var pid=this.lid;//商品编号
@@ -106,6 +115,8 @@ import comment from "../sub/comment.vue"
             price:price
           }
         }).then(result=>{
+          this.uid=result.data.uid
+          console.log(this.uid)
           if(result.data.code>0){
             this.$store.commit("increment");
             Toast(result.data.msg);
@@ -115,14 +126,20 @@ import comment from "../sub/comment.vue"
         })
       },
     goodsSub(){
-        if(this.val>1){
+        if(this.val>0){
           this.val--;
+        }
+        if(this.val<=0){
+          this.$refs.c12.style.background="#f8f8f8";
         }        
       },
       goodsAdd(){
-        if(this.val<=998){
+        if(this.val<=9){
           this.val++;
         }
+        if(this.val>=0){
+          this.$refs.c12.style.background="#fd620d";
+        }    
       },
     add(){
       this.$refs.more.style.display="none"
@@ -230,5 +247,26 @@ import comment from "../sub/comment.vue"
 /**添加购物车 */
 .mui-card-footer{
   margin-bottom:50px;
+}
+/**购物车加减样式 */
+.mui-card-inner .mui-numbox{
+  border:none;
+  background-color:	transparent;
+}
+.mui-numbox .mui-numbox-input, .mui-numbox .mui-input-numbox{
+  border-right:none!important;
+  border-left:none!important;
+}
+.app-goodsinfo .mui-numbox .mui-numbox-btn-minus, .mui-numbox .mui-btn-numbox-minus{
+  border-radius:50% !important;
+  background-color:#fd620d;
+}
+.mui-numbox .mui-btn-numbox-plus{
+  border-radius:50% !important;
+  background-color:#fd620d!important;
+}
+.mui-numbox [class*=numbox-btn], .mui-numbox [class*=btn-numbox]{
+  width:32px!important;
+  height:32px!important;
 }
 </style>

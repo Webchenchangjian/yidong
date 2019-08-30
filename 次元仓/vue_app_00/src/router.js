@@ -10,6 +10,7 @@ import Register from './components/tabbar/Register'
 import ShopList from './components/tabbar/ShopList'
 import Logout from './components/tabbar/Logout'
 import Classify from './components/tabbar/Classify'
+import addressList from './components/tabbar/address_list'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -23,8 +24,7 @@ export default new Router({
     {path:'/register',component:Register},
     {path:'/shoplist',component:ShopList},
     {path:'/logout',component:Logout},
-    {path:'/classify',component:Classify}
-    
-
+    {path:'/classify',component:Classify},
+    {path:'/address',component:addressList}
   ]
 })
